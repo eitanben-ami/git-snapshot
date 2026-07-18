@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.eggs/
+dist/
+build/
+*.egg-info/
+.env
+.venv/
+venv/
+.idea/
+.vscode/
+AGENTS.md
+CLAUDE.md
+coverage/
+htmlcov/
+*.db
+.git/
