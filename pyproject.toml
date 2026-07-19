@@ -32,6 +32,9 @@ git-snapshot = "git_snapshot.cli:main"
 [tool.pytest.ini_options]
 addopts = "-q"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py311"
