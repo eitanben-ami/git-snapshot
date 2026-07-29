@@ -1,6 +1,8 @@
 # git-snapshot
 
-A minimal CLI for capturing a reproducible snapshot of a git repository.
+A minimal CLI for capturing a reproducible repository snapshot manifest.
+
+Source: https://github.com/eitanben-ami/git-snapshot
 
 ## About
 
