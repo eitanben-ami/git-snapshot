@@ -1,8 +1,8 @@
 # git-snapshot
 
-A minimal CLI for capturing a reproducible repository snapshot manifest.
+Repository: https://github.com/eitanben-ami/git-snapshot
 
-Source: https://github.com/eitanben-ami/git-snapshot
+A minimal CLI for capturing a reproducible repository snapshot manifest.
 
 ## About
 
@@ -52,10 +52,6 @@ git-snapshot/
     test_manifest.py
     test_cli.py
 ```
-
-## Tags
-
-`git`, `snapshot`, `cli`, `developer-tools`, `python`, `manifest`
 
 ## License
 
