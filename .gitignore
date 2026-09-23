@@ -13,5 +13,3 @@ AGENTS.md
 CLAUDE.md
 coverage/
 htmlcov/
-*.db
-.git/
