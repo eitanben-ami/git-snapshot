@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import json
 import subprocess
 from pathlib import Path
-from typing import Any
 
 import pytest
 
@@ -12,12 +10,28 @@ from git_snapshot.manifest import collect
 
 @pytest.fixture()
 def git_repo(tmp_path: Path) -> Path:
-    subprocess.run(["git", "init", "-b", "main"], cwd=tmp_path, check=True, capture_output=True)
-    subprocess.run(["git", "config", "user.email", "agent@test.local"], cwd=tmp_path, check=True, capture_output=True)
-    subprocess.run(["git", "config", "user.name", "Test Agent"], cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "init", "-b", "main"], cwd=tmp_path, check=True, capture_output=True
+    )
+    subprocess.run(
+        ["git", "config", "user.email", "agent@test.local"],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "Test Agent"],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+    )
     (tmp_path / "note.txt").write_text("x", encoding="utf-8")
-    subprocess.run(["git", "add", "note.txt"], cwd=tmp_path, check=True, capture_output=True)
-    subprocess.run(["git", "commit", "-m", "seed"], cwd=tmp_path, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "add", "note.txt"], cwd=tmp_path, check=True, capture_output=True
+    )
+    subprocess.run(
+        ["git", "commit", "-m", "seed"], cwd=tmp_path, check=True, capture_output=True
+    )
     return tmp_path
 
 
@@ -46,7 +60,9 @@ def test_dirty_tree_has_changes(git_repo: Path) -> None:
 
 def test_added_and_removed_files(git_repo: Path) -> None:
     (git_repo / "added.txt").write_text("new", encoding="utf-8")
-    subprocess.run(["git", "add", "added.txt"], cwd=git_repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "add", "added.txt"], cwd=git_repo, check=True, capture_output=True
+    )
     target = git_repo / "note.txt"
     target.unlink()
 
@@ -72,7 +88,9 @@ def test_manifest_serialization(git_repo: Path) -> None:
 
 
 def test_output_is_deduplicated(git_repo: Path) -> None:
-    subprocess.run(["git", "add", "note.txt"], cwd=git_repo, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "add", "note.txt"], cwd=git_repo, check=True, capture_output=True
+    )
     (git_repo / "fresh.txt").write_text("untracked", encoding="utf-8")
     (git_repo / "also.txt").write_text("untracked also", encoding="utf-8")
     manifest = collect(git_repo)

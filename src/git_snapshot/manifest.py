@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import json
-import os
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, List
+from typing import List
 
 
 @dataclass(frozen=True)
@@ -58,8 +56,12 @@ def _normalize(paths: List[str]) -> List[str]:
 
 def collect(working_dir: Path | None = None) -> SnapshotManifest:
     cwd = working_dir or Path.cwd()
-    branch = (_safe_run(["git", "branch", "--show-current"], cwd=cwd) or "unknown").strip()
-    commit = (_safe_run(["git", "rev-parse", "--short=12", "HEAD"], cwd=cwd) or "unknown").strip()
+    branch = (
+        _safe_run(["git", "branch", "--show-current"], cwd=cwd) or "unknown"
+    ).strip()
+    commit = (
+        _safe_run(["git", "rev-parse", "--short=12", "HEAD"], cwd=cwd) or "unknown"
+    ).strip()
 
     raw = _safe_run(["git", "status", "--porcelain"], cwd=cwd)
     diff_lines = raw.splitlines()

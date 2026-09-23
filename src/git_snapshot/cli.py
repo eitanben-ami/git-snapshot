@@ -28,7 +28,9 @@ def save_manifest(output: str | None = None, manifest_path: Path | None = None) 
 
     manifest = collect(manifest_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(manifest.to_dict(), indent=2) + os.linesep, encoding="utf-8")
+    path.write_text(
+        json.dumps(manifest.to_dict(), indent=2) + os.linesep, encoding="utf-8"
+    )
     print(path)
     return 0 if not manifest.dirty else 2
 
